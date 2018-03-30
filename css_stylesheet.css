@@ -103,3 +103,25 @@ body {
 #cookies {
     background-color:sandybrown;
 }
+#guess_display {
+    font-size: 24px;
+    border:ridge #f8ff00 10px;
+    width: 200px;
+    margin:auto;
+    padding: 7px;
+    text-align: center;
+}
+#guess_form {
+    font-size: 20px;
+    width: 200px;
+    margin:auto;
+    padding: 4px;
+    text-align: center;
+}
+#guess_status {
+    font-size: 20px;
+    width: 200px;
+    margin:auto;
+    padding: 4px;
+    text-align: center;
+}
