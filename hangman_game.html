@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Word Guesser Starter Code</title>
+    <link rel="stylesheet" type="text/css" href="css_stylesheet.css">
+</head>
+<body>
+<div class="topnav">
+    <a class="active" href="index.html">Home</a>
+    <a href="Recipe.html">Recipe</a>
+    <a href="event_invite.html">Wedding Invitation</a>
+    <a href="hangman_game.html">Hangman Game</a>
+    <a href="travel_webpage.html">Travel Webpage</a>
+
+</div>
+<div id="guess_display"></div>
+
+
+<form id="guess_form">
+    <label>Guess a letter:
+        <input type="text" id="guess_input">
+    </label>
+</form>
+
+<div id="guess_status"></div>
+
+<script>
+    // Store DOM elements in variables
+    var guessForm = document.getElementById("guess_form");
+    var guessDisplay = document.getElementById("guess_display");
+    var guessInput = document.getElementById("guess_input");
+    var guessStatus = document.getElementById("guess_status");
+
+    // Initialize game state variables
+    var secretWord = "banana";
+    var guessedWord = [];
+    var guessedLetters = [];
+    for (var i = 0; i < secretWord.length; i++) {
+        guessedWord[i] = "_";
+    }
+
+    var check1 = 0;
+
+    // Returns true if its a correct guess -
+    //  if the letter is anywhere in the word
+    // Also updates guessedWord and guessedLetters
+    var checkLetterGuess = function(letter){
+        for (var i = 0; i < secretWord.length; i++) {
+            if (letter === secretWord[i]) {
+                guessedLetters.push(letter);
+                guessedWord[i] = letter;
+                check1 = check1 + 1
+            }
+            //else {check = 0}
+        }
+        if (check1 !== 0) {
+            check1 = 0;
+            return true;
+        }
+    };
+
+    // Returns true if they guessed the whole word
+    var hasWon = function() {
+        var check2 = 0;
+        for (var j = 0; j < secretWord.length; j++) {
+            if (secretWord[j] === guessedWord[j]) {
+                check2 = check2 + 1;
+                console.log(check2)
+            }
+        }
+        if (check2 === secretWord.length) {
+            return true
+        }
+    };
+
+
+    var displayGuessedWord = function() {
+        guessDisplay.innerHTML = guessedWord.join(" ");
+    };
+
+
+    guessForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        var foundLetter = checkLetterGuess(guessInput.value);
+        if (foundLetter) {
+            guessStatus.innerHTML = "Yay you found one!";
+        } else {
+            guessStatus.innerHTML = "Sorry, not so much!";
+        }
+        if (hasWon()) {
+            guessStatus.innerHTML += "WOOO WINNER WINNER!";
+        }
+        displayGuessedWord();
+        guessInput.value = "";
+    });
+    displayGuessedWord();
+
+    // Step 0: Read through the code and understand it
+    // Step 1: Implement guessLetter
+    // Step 2: Implement hasWon
+    // Bonus Steps:
+    // - Randomly generate a word for each game
+    //   by pulling from an array
+    // - Come up with a scoring mechanism --
+    //    you can declare game over in a # of guesses
+    //    or just track number of guesses and display it
+    // - Display the letters they've already guessed
+    // - Implement error checking for duplicate guesses
+    // - Make way cooler win and lose states!
+
+</script>
+<img src= "http://2.bp.blogspot.com/-gT8YMy3QXhU/UT8hz_5c7VI/AAAAAAAAA30/nD0J6Zm46Cc/s1600/hangman.gif" class = "hangman-image" alt= "hangman">
+</body>
+</html>
