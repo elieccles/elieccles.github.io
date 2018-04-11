@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>TicTacToe: Template</title>
+    <link rel = "stylesheet" type = "text/css" href = "css_stylesheet.css">
+
+</head>
+<body>
+<div class="topnav">
+    <a class="active" href="index.html">Home</a>
+    <a href="Recipe.html">Recipe</a>
+    <a href="event_invite.html">Wedding Invitation</a>
+    <a href="hangman_game.html">Hangman Game</a>
+    <a href="travel_webpage.html">Travel Webpage</a>
+    <a href="tic-tac-toe.html">Tic Tac Toe</a>
+</div>
+<table id="board" border="1">
+</table>
+
+<div id="status">
+</div>
+
+<script>
+    var player = "X";
+    var board = [];
+    // Initialize to a 2D array of empty strings, 3x3
+    for (var row = 0; row < 3; row++) {
+        var cols = [];
+        for (var col = 0; col < 3; col++) {
+            cols.push(" ");
+        }
+        board.push(cols);
+    }
+
+    // Handles click by current player of row and col
+    var handleClick = function(row, col) {
+        // TODO: Check if move is valid (space is empty)
+        // TODO: If move is valid, update board array with player
+        // TODO: Toggle current player
+        if(board[row][col] === " "){
+            board[row][col] = player;
+        } else if(board[row][col] === "X" || board[row][col] === "O"){
+            return;
+        }
+        if(player === "X"){
+            player = "O";
+        } else if(player === "O"){
+            player = "X";
+        }
+        updateBoardDisplay();
+        updateStatusDisplay();
+    };
+
+    // Returns winning player if found (X or O)
+    // If no winner, returns empty string
+    var checkForWinner = function() {
+        // TODO: Check for win of rows, cols, or diagonals
+        for(var i = 0; i < 3; i++){
+            if(board[0][i] !== " " && board[0][i] === board[1][i] && board[0][i] === board[2][i] && board[1][i] ===  board[2][i]){
+                var winnerPlayer;
+                if(player === "X"){
+                    winnerPlayer = "O";
+                } else if(player === "O"){
+                    winnerPlayer = "X";
+                }
+                return winnerPlayer;
+            }
+        }
+        for(var i = 0; i < 3; i++){
+            if(board[i][0] !== " " && board[i][0] === board[i][1] && board[i][0] === board[i][2] && board[i][1] ===  board[i][2]){
+                var winnerPlayer;
+                if(player === "X"){
+                    winnerPlayer = "O";
+                } else if(player === "O"){
+                    winnerPlayer = "X";
+                }
+                return winnerPlayer;
+            }
+        }
+        if(board[0][0] !== " " && board[0][0] === board[1][1] && board[0][0] === board[2][2] && board[1][1] ===  board[2][2]){
+            var winnerPlayer;
+            if(player === "X"){
+                winnerPlayer = "O";
+            } else if(player === "O"){
+                winnerPlayer = "X";
+            }
+            return winnerPlayer;
+        }
+        if(board[0][2] !== " " && board[0][2] === board[1][1] && board[0][2] === board[2][0] && board[1][1] ===  board[2][0]){
+            var winnerPlayer;
+            if(player === "X"){
+                winnerPlayer = "O";
+            } else if(player === "O"){
+                winnerPlayer = "X";
+            }
+            return winnerPlayer;
+        }
+        return "";
+    };
+
+    var setupClickListener = function() {
+        var boardTable = document.getElementById("board");
+        boardTable.addEventListener("click", function(event) {
+            if (event.target.nodeName !== "TD") {
+                return;
+            }
+            var cell = event.target;
+            var row = Number.parseInt(cell.getAttribute("data-row"), 10);
+            var col = Number.parseInt(cell.getAttribute("data-col"), 10);
+            handleClick(row, col);
+        });
+    };
+
+    var updateBoardDisplay = function() {
+        var boardTable = document.getElementById("board");
+        boardTable.innerHTML = "";
+        for (var row = 0; row < board.length; row++) {
+            var tableRow = document.createElement("tr");
+            for (var col = 0; col < board[row].length; col++) {
+                var cellTd = document.createElement("td");
+                cellTd.innerHTML = board[row][col];
+                cellTd.setAttribute("data-row", row);
+                cellTd.setAttribute("data-col", col);
+                tableRow.appendChild(cellTd);
+            }
+            boardTable.appendChild(tableRow);
+        }
+    };
+
+    var updateStatusDisplay = function() {
+        var statusDiv = document.getElementById("status");
+        var winner = checkForWinner();
+        if (winner) {
+            statusDiv.innerHTML = "Winner is " + winner;
+        } else {
+            statusDiv.innerHTML = "Current player is " + player;
+        }
+    };
+
+    setupClickListener();
+    updateBoardDisplay();
+    updateStatusDisplay();
+
+
+</script>
+</body>
+</html>
