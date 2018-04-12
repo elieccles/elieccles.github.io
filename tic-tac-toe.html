@@ -12,16 +12,20 @@
     <a class="active" href="index.html">Home</a>
     <a href="Recipe.html">Recipe</a>
     <a href="event_invite.html">Wedding Invitation</a>
-    <a href="hangman_game.html">Hangman Game</a>
     <a href="travel_webpage.html">Travel Webpage</a>
+    <a href="hangman_game.html">Hangman Game</a>
     <a href="tic-tac-toe.html">Tic Tac Toe</a>
 </div>
-<table id="board" border="1">
+<div class = "ttt-board">
+<table width = "200px" height = "200px" id="board" border="1">
 </table>
 
 <div id="status">
 </div>
-
+</div>
+<img id = "math-matician" src= "https://i.pinimg.com/originals/ea/f9/1c/eaf91c6254b9cc3e26580dfc5a5ad615.png">
+<img id = "owl" src= "https://i.pinimg.com/originals/fe/3d/68/fe3d68f0819b026be4b3c71d14acabcc.png">
+<img id = "cat" src="http://www.clker.com/cliparts/i/7/z/Q/w/A/cute-sleeping-cat-hi.png">
 <script>
     var player = "X";
     var board = [];
@@ -133,7 +137,7 @@
         var statusDiv = document.getElementById("status");
         var winner = checkForWinner();
         if (winner) {
-            statusDiv.innerHTML = "Winner is " + winner;
+            statusDiv.innerHTML = "Winner is " + winner + "!";
         } else {
             statusDiv.innerHTML = "Current player is " + player;
         }

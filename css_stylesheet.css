@@ -131,3 +131,30 @@ body {
      height: 30px;
      text-align: center;
  }
+
+ .ttt-board {
+     position: absolute;
+     top: 85px;
+     left: 600px;
+     padding: 8px;
+     border: groove #2fff00 10px;
+     font-size: 22px;
+ }
+ #math-matician {
+     position: absolute;
+     top: 70px;
+     left: 250px;
+     width: 300px
+ }
+ #owl {
+     position: absolute;
+     top: 115px;
+     left: 940px;
+     width: 220px;
+ }
+ #cat {
+     position: absolute;
+     top: 450px;
+     left: 575px;
+     width: 275px;
+ }
