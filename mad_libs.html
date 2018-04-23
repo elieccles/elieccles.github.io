@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Mad Libs</title>
+    <link rel="stylesheet" type="text/css" href="css_stylesheet.css">
+</head>
+<body>
+<div class="topnav">
+    <a class="active" href="index.html">Home</a>
+    <a href="Recipe.html">Recipe</a>
+    <a href="event_invite.html">Wedding Invitation</a>
+    <a href="travel_webpage.html">Travel Webpage</a>
+    <a href="hangman_game.html">Hangman Game</a>
+    <a href="tic-tac-toe.html">Tic Tac Toe</a>
+    <a href="mad_libs.html">Mad Libs</a>
+</div>
+<h1 id="madlibs_title">Mad Libs</h1>
+
+<form id="lib-form">
+    <label>
+        <span>Animal In Ocean That Swims:</span> <input type="text" id="noun">
+    </label>
+    <br/>
+    <label>
+        <span>Verb:</span> <input type="text" id="verb">
+    </label>
+    <br/>
+    <label>
+        <span>Adverb:</span> <input type="text" id="adverb">
+    </label>
+    <br/>
+    <label>
+        <span>Someone That Works In a Store:</span> <input type="text" id="noun1">
+    </label>
+    <br/>
+    <label>
+        <span>Verb:</span> <input type="text" id="verb1">
+    </label>
+    <br/>
+    <label>
+        <span>Type Of Candy: </span> <input type="text" id="noun2">
+    </label>
+    <br/>
+    <label>
+        <span>Verb:</span> <input type="text" id="verb2">
+    </label>
+    <br/>
+    <label>
+        <span>Same noun as second noun:</span> <input type="text" id="noun3">
+    </label>
+    <br/>
+    <label>
+        <span>pronoun:</span> <input type="text" id="pronoun">
+    </label>
+    <br/>
+    <label>
+        <span>Verb:</span> <input type="text" id="verb3">
+    </label>
+    <br/>
+    <button type="submit">Generate!</button>
+</form>
+<div id = "story_display">
+<div id="story"></div>
+<img id = "noun_image" src="https://placeit.net/uploads/background/image/914/default_b7618e53ec04ea3580899723dfafa527.png" height = 150>
+<img id = "noun1_image" src="https://placeit.net/uploads/background/image/914/default_b7618e53ec04ea3580899723dfafa527.png" height = 150>
+<img id = "noun2_image" src="https://placeit.net/uploads/background/image/914/default_b7618e53ec04ea3580899723dfafa527.png" height = 150>
+</div>
+<script>
+    var libForm = document.getElementById("lib-form");
+    libForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        var nounVal = document.getElementById("noun").value;
+        var verbVal = document.getElementById("verb").value;
+        var adverbVal = document.getElementById("adverb").value;
+        var nounVal1 = document.getElementById("noun1").value;
+        var verbVal1 = document.getElementById("verb1").value;
+        var nounVal2 = document.getElementById("noun2").value;
+        var verbVal2 = document.getElementById("verb2").value;
+        var nounVal3 = document.getElementById("noun3").value;
+        var pronounVal = document.getElementById("pronoun").value;
+        var verbVal3 = document.getElementById("verb3").value;
+
+
+
+        var storyDiv = document.getElementById("story");
+        storyDiv.innerHTML = "The great big " + nounVal + " went to the store. At the store he " + verbVal + " " + adverbVal + " past the " + nounVal1 + " and " + verbVal1 + " a " + nounVal2 + ". He then " + verbVal2 + " back to the " + nounVal3 + " looked " + pronounVal + " in the eye, and " + verbVal3 + " out of the store.";
+
+        if (nounVal === "fish") {
+            document.getElementById("noun_image").setAttribute("src", "http://www.clipartlord.com/wp-content/uploads/2014/01/fish.png")
+        }
+        if (nounVal === "shark") {
+            document.getElementById("noun_image").setAttribute("src", "http://worldartsme.com/images/cartoon-shark-free-clipart-1.jpg")
+        }
+        if (nounVal === "turtle") {
+            document.getElementById("noun_image").setAttribute("src", "https://openclipart.org/download/229886/1444762942.svg")
+        }
+        if (nounVal === "whale") {
+            document.getElementById("noun_image").setAttribute("src", "http://images.clipartpanda.com/whale-clip-art-whale_a06.png")
+        }
+        if (nounVal === "jellyfish") {
+            document.getElementById("noun_image").setAttribute("src", "https://content.mycutegraphics.com/graphics/sea/cute-cartoon-jellyfish.png")
+        }
+        if (nounVal1 === "cashier" || nounVal1 === "employee") {
+            document.getElementById("noun1_image").setAttribute("src", "https://openclipart.org/download/296701/gahag-cashier.svg")
+        }
+        if (nounVal1 === "boss") {
+            document.getElementById("noun1_image").setAttribute("src", "http://s3.lightboxcdn.com/vendors/f31ecf37-a9cb-4a85-8fc8-776ba75ac342/uploads/2f155394-1204-47ec-8ddf-6936d0bba052/SalesWoman_HiRes.png")
+        }
+        if (nounVal2 === "snickers bar" || nounVal2 === "candy bar" || nounVal2 === "chocolate bar" || nounVal2 === "kit kat" || nounVal2 === "Hershey's bar" || nounVal2 === "crunch bar") {
+            document.getElementById("noun2_image").setAttribute("src", "http://worldartsme.com/images/candy-bar-clipart-1.jpg")
+        }
+        if (nounVal2 === "bubble gum" || nounVal2 === "gum" || nounVal2 === "gumball" || nounVal2 === "blowing gum") {
+            document.getElementById("noun2_image").setAttribute("src", "https://content.mycutegraphics.com/graphics/food/boy-blowing-gum-bubble.png")
+        }
+        if (nounVal2 === "lollipop") {
+            document.getElementById("noun2_image").setAttribute("src", "https://i.pinimg.com/originals/25/ba/da/25bada7976d1397e542057ee2603e948.png")
+        }
+        if (nounVal2 === "jelly beans") {
+            document.getElementById("noun2_image").setAttribute("src", "http://content.mycutegraphics.com/graphics/jellybean/smiling-purple-jelly-bean.png")
+        }
+        if (nounVal2 === "candy") {
+            document.getElementById("noun2_image").setAttribute("src", "https://emojipedia-us.s3.amazonaws.com/thumbs/120/apple/129/candy_1f36c.png")
+        }
+    });
+
+</script>
+
+</body>
+</html>
