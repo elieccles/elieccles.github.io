@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Bin</title>
+    <link rel="stylesheet" type="text/css" href="css_stylesheet.css">
+</head>
+<body>
+<div class="topnav">
+    <a class="active" href="index.html">Home</a>
+    <a href="Recipe.html">Recipe</a>
+    <a href="event_invite.html">Wedding Invitation</a>
+    <a href="travel_webpage.html">Travel Webpage</a>
+    <a href="hangman_game.html">Hangman Game</a>
+    <a href="tic-tac-toe.html">Tic Tac Toe</a>
+    <a href="mad_libs.html">Mad Libs</a>
+    <a href="javascript_quiz.html"> Javascript Quiz</a>
+</div>
+<h3 id = "exciting_quiz_time">Exciting Quiz Time!</h3>
+
+<form id="quiz-form">
+
+    <fieldset>
+        <legend>What language is this programmed in?</legend>
+        <label><input name="question1" value="javascript" type="radio">JavaScript</label><br>
+        <label><input name="question1" value="python" type="radio">Python</label><br>
+        <label><input name="question1" value="java" type="radio">Java</label><br>
+    </fieldset>
+    <div id="results"></div>
+
+    <fieldset>
+        <legend>Inside which HTMl tag do you put the Javascript code in?</legend>
+        <label><input name="question2" value="<scripting>" type="radio">&lt;scripting&gt;</label><br>
+        <label><input name="question2" value="<javascript>" type="radio">&lt;javascript&gt;</label><br>
+        <label><input name="question2" value="<script>" type="radio">&lt;script&gt;</label><br>
+    </fieldset>
+    <div id="results2"></div>
+
+    <fieldset>
+        <legend>How to comment multiple lines in javascript</legend>
+        <label><input name="question3" value="//Then comment for multiple lines of code//" type="radio">//Then comment for multiple lines of code//</label><br>
+        <label><input name="question3" value="/*Then comment for multiple lines of code*/" type="radio">/*Then comment for multiple lines of code*/</label><br>
+        <label><input name="question3" value="<--Then comment for multiple lines of code/-->" type="radio">&lt;--Then comment for multiple lines of code/--&gt;</label><br>
+    </fieldset>
+    <div id="results3"></div>
+
+    <button id = "results_button" type="submit">Check me</button>
+</form>
+
+<div id = "score_display">
+
+</div>
+
+<ol>
+    <li>Add another question</li>
+    <li>Add a score variable and output their total score</li>
+    <li>Bonus: add LOTS more questions</li>
+    <li>Bonus: make a really cool animation if they get 100%</li>
+    <li>Bonus: make it look way better with CSS</li>
+</ol>
+
+<script>
+    var quizForm = document.getElementById("quiz-form");
+    quizForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        var score = 0;
+
+        // resultsDiv is the div to display the results in
+        var resultsDiv = document.getElementById("results");
+
+        // answer1 stores whatever <input> element that they checked
+        //  or null if they didn't check any answer
+        var answer1 = document.querySelector('[name="question1"]:checked');
+        if (!answer1) {
+            resultsDiv.innerHTML = "You didn't check anything! Sadface";
+        } else {
+            // answer1.value is the value attribute of the checked <input>
+            if (answer1.value === "javascript") {
+                resultsDiv.innerHTML = "You got it!";
+                score = score + 1;
+            } else {
+                resultsDiv.innerHTML = "Try again!";
+            }
+        }
+
+        // resultsDiv is the div to display the results in
+        var resultsDiv2 = document.getElementById("results2");
+
+        // answer2 stores whatever <input> element that they checked
+        //  or null if they didn't check any answer
+        var answer2 = document.querySelector('[name="question2"]:checked');
+        if (!answer2) {
+            resultsDiv2.innerHTML = "You didn't check anything! Sadface";
+        } else {
+            // answer2.value is the value attribute of the checked <input>
+            if (answer2.value === "<script>") {
+                resultsDiv2.innerHTML = "You got it!";
+                score = score + 1;
+            } else {
+                resultsDiv2.innerHTML = "Try again!";
+            }
+        }
+
+        // resultsDiv is the div to display the results in
+        var resultsDiv3 = document.getElementById("results3");
+
+        // answer3 stores whatever <input> element that they checked
+        //  or null if they didn't check any answer
+        var answer3 = document.querySelector('[name="question3"]:checked');
+        if (!answer3) {
+            resultsDiv3.innerHTML = "You didn't check anything! Sadface";
+        } else {
+            // answer3.value is the value attribute of the checked <input>
+            if (answer3.value === "/*Then comment for multiple lines of code*/") {
+                resultsDiv3.innerHTML = "You got it!";
+                score = score + 1;
+            } else {
+                resultsDiv3.innerHTML = "Try again!";
+            }
+        }
+        document.getElementById("score_display").innerHTML = Math.floor(score/3 * 100) + "%";
+    });
+
+</script>
+</body>
+</html>
