@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Decoder</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<h1>Image Decoder</h1>
+
+<h3>Instructions</h3>
+<p><strong>1.</strong> Using the magnifier glass, look really closely at the images to find a combination of hidden numbers placed somewhere on the image.</p>
+<p><strong>2.</strong> Use the numbers that are in the image to decode a message using the table with the number to alphabet values.</p>
+<p><strong>3.</strong> Unscramble the letters to figure out the word.</p>
+<p><strong>4.</strong> Finally type in your guess to the decoder!</p>
+<div class="img-magnifier-container">
+    <img id="image" src="beach1.png">
+</div>
+
+<button id = "nextImage" onclick= "imageDisplay()"> Next Image</button>
+<form id="word_guess">
+    <label>Enter Guess Here:
+        <input type="text" id="messageInput" autocomplete="off" maxlength="9">
+    </label>
+    <button type="submit" id="submit_guess">Submit</button>
+</form>
+<label>Workspace:
+    <input type="text" id="work_space" autocomplete="off"><br>
+</label>
+<div id = "correct_word"></div>
+<div id = "game_over"></div>
+
+<table>
+    <tr>
+        <th>Number</th>
+        <td>7</td>
+        <td>28</td>
+        <td>10</td>
+        <td>1</td>
+        <td>29</td>
+        <td>33</td>
+        <td>17</td>
+        <td>92</td>
+        <td>35</td>
+        <td>24</td>
+        <td>27</td>
+        <td>63</td>
+        <td>31</td>
+    </tr>
+    <tr>
+        <th>Letter</th>
+        <td>E</td>
+        <td>G</td>
+        <td>Q</td>
+        <td>D</td>
+        <td>P</td>
+        <td>H</td>
+        <td>S</td>
+        <td>Y</td>
+        <td>K</td>
+        <td>M</td>
+        <td>C</td>
+        <td>O</td>
+        <td>T</td>
+</table>
+<p>
+
+</p>
+<table>
+    <tr>
+        <th>Number</th>
+        <td>58</td>
+        <td>79</td>
+        <td>89</td>
+        <td>42</td>
+        <td>82</td>
+        <td>40</td>
+        <td>13</td>
+        <td>19</td>
+        <td>15</td>
+        <td>52</td>
+        <td>21</td>
+        <td>9</td>
+        <td>12</td>
+    </tr>
+    <tr>
+        <th>Letter</th>
+        <td>N</td>
+        <td>L</td>
+        <td>R</td>
+        <td>F</td>
+        <td>Z</td>
+        <td>X</td>
+        <td>J</td>
+        <td>A</td>
+        <td>I</td>
+        <td>W</td>
+        <td>V</td>
+        <td>U</td>
+        <td>B</td>
+    </tr>
+</table>
+
+
+
+<script>
+    function magnify(imgID, zoom) {//I got some maginfier features from W3 Schools. Lines 160-218 and 255&256 are cited to W3 schools
+        var img, glass, w, h, bw;
+        img = document.getElementById(imgID);
+        /*create magnifier glass:*/
+        if (document.getElementsByClassName("img-magnifier-glass").length === 1) {
+            glass = document.getElementsByClassName("img-magnifier-glass")[0]
+        } else {
+            glass = document.createElement("DIV");
+        }
+
+        glass.setAttribute("class", "img-magnifier-glass");
+        /*insert magnifier glass:*/
+        img.parentElement.insertBefore(glass, img);
+        /*set background properties for the magnifier glass:*/
+        glass.style.backgroundImage = "url('" + img.src + "')";
+        glass.style.backgroundRepeat = "no-repeat";
+        glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
+        bw = 3;
+        w = glass.offsetWidth / 2;
+        h = glass.offsetHeight / 2;
+        /*execute a function when someone moves the magnifier glass over the image:*/
+        glass.addEventListener("mousemove", moveMagnifier);
+        img.addEventListener("mousemove", moveMagnifier);
+        /*and also for touch screens:*/
+        glass.addEventListener("touchmove", moveMagnifier);
+        img.addEventListener("touchmove", moveMagnifier);
+        function moveMagnifier(e) {
+            var pos, x, y;
+            /*prevent any other actions that may occur when moving over the image*/
+            e.preventDefault();
+            /*get the cursor's x and y positions:*/
+            pos = getCursorPos(e);
+            x = pos.x;
+            y = pos.y;
+            /*prevent the magnifier glass from being positioned outside the image:*/
+            if (x > img.width - (w / zoom)) {x = img.width - (w / zoom);}
+            if (x < w / zoom) {x = w / zoom;}
+            if (y > img.height - (h / zoom)) {y = img.height - (h / zoom);}
+            if (y < h / zoom) {y = h / zoom;}
+            /*set the position of the magnifier glass:*/
+            glass.style.left = (x - w) + "px";
+            glass.style.top = (y - h) + "px";
+            /*display what the magnifier glass "sees":*/
+            glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
+        }
+        function getCursorPos(e) {
+            var a, x = 0, y = 0;
+            e = e || window.event;
+            /*get the x and y positions of the image:*/
+            a = img.getBoundingClientRect();
+            /*calculate the cursor's x and y coordinates, relative to the image:*/
+            x = e.pageX - a.left;
+            y = e.pageY - a.top;
+            /*consider any page scrolling:*/
+            x = x - window.pageXOffset;
+            y = y - window.pageYOffset;
+            return {x : x, y : y};
+        }
+    }
+    var images = [
+        "beach1.png", "park1.png", "garden1.png"
+    ];
+    var imageNow = 0;
+
+    function imageDisplay() {
+        var img = document.getElementById("image");
+        img.src = images[imageNow];
+        document.getElementById("correct_word").innerHTML="";
+        if (imageNow <= images.length-1) {
+            imageNow++;
+        } else {
+            document.getElementById("game_over").innerHTML="Game Over!";
+            img.src="garden1.png";
+        }
+    }
+    imageDisplay();
+
+    document.getElementById("word_guess").addEventListener("submit", function(event) {
+        event.preventDefault();
+        var guess = document.getElementById("messageInput").value;
+        guess= guess.toLowerCase();
+        if (guess=== "qualified" && imageNow===1) {
+            document.getElementById("correct_word").innerHTML="Correct Word!";
+        } else if(guess==="fireplace" && imageNow===2) {
+            document.getElementById("correct_word").innerHTML="Correct Word!";
+        } else if(guess==="education" && imageNow===3) {
+            document.getElementById("correct_word").innerHTML="Correct Word!";
+        } else {
+            document.getElementById("correct_word").innerHTML="Wrong Word!";
+        }
+
+    });
+    /* Initiate Magnify Function
+with the id of the image, and the strength of the magnifier glass:*/
+
+    img = document.getElementById("image").addEventListener("load", function () {
+        magnify("image", 3);
+    });
+</script>
+</body>
+</html>
