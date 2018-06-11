@@ -1,0 +1,51 @@
+body {
+    margin: 15px;
+    background-color: #92f3ff;
+}
+* {box-sizing: border-box;}
+.img-magnifier-container {
+    position:relative;
+}
+.img-magnifier-glass {
+    position: absolute;
+    border: 3px solid #000;
+    border-radius: 50%;
+    cursor: none;
+    /*Set the size of the magnifier glass:*/
+    width: 100px;
+    height: 100px;
+}
+table, th, td {
+    border: 2px solid black;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+th, td {
+    padding: 15px;
+    width:7.1428%;
+}
+img {
+    width: 80%;
+    border: solid black;
+}
+#nextImage {
+    font-weight: 500;
+    background-color: #1bdd00;
+    margin-bottom: 10px;
+}
+#submit_guess {
+    font-weight: 500;
+    background-color: #f8ff00;
+    margin-bottom: 6px;
+}
+#work_space {
+    width: 225px;
+    height: 40px;
+    margin: 6px;
+    font-size: 14px;
+    border: solid black 1px;
+}
+#messageInput {
+    font-size: 12px;
+    border: solid black 1px;
+}
